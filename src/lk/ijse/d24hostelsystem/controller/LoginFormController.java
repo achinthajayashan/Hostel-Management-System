@@ -3,9 +3,18 @@ package lk.ijse.d24hostelsystem.controller;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.fxml.FXMLLoader.load;
 
 public class LoginFormController {
     public JFXTextField txtUserName;
@@ -13,6 +22,7 @@ public class LoginFormController {
     public JFXTextField txtShowPassword;
     public ImageView showIcon;
     public ImageView hideIcon;
+    public AnchorPane pane;
     String password;
 
     public void initialize(){
@@ -20,7 +30,11 @@ public class LoginFormController {
         txtShowPassword.setVisible(false);
     }
 
-    public void loginOnAction(ActionEvent actionEvent) {
+    public void loginOnAction(ActionEvent actionEvent) throws IOException {
+//        Stage stage= new Stage();
+//        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/ijse/d24hostelsystem/view/Dashboard.fxml"))));
+
+        pane.getChildren().setAll((Node) load(getClass().getResource("/lk/ijse/d24hostelsystem/view/DashboardForm.fxml")));
     }
 
     public void hidePasswordonAction(KeyEvent keyEvent) {
