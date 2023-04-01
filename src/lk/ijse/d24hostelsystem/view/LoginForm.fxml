@@ -26,7 +26,7 @@
             <Font size="20.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="txtPassword" focusColor="#e1150a" layoutX="858.0" layoutY="502.0" prefHeight="27.0" prefWidth="231.0" promptText="Password">
+      <JFXPasswordField fx:id="txtPassword" focusColor="#e1150a" layoutX="858.0" layoutY="502.0" onKeyReleased="#hidePasswordonAction" prefHeight="40.0" prefWidth="199.0" promptText="Password">
          <font>
             <Font size="20.0" />
          </font>
@@ -39,5 +39,20 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXTextField fx:id="txtShowPassword" focusColor="#e1150a" layoutX="858.0" layoutY="502.0" onKeyReleased="#showPasswordOnAction" prefHeight="40.0" prefWidth="199.0" promptText="Password">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <ImageView fx:id="showIcon" fitHeight="40.0" fitWidth="33.0" layoutX="1069.0" layoutY="507.0" onMouseClicked="#showPasswordOncliked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/Eye.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="hideIcon" fitHeight="40.0" fitWidth="33.0" layoutX="1069.0" layoutY="506.0" onMouseClicked="#hidePasswordOncliked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/Hide.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
