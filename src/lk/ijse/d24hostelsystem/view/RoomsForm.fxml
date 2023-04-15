@@ -11,22 +11,22 @@
 
 <AnchorPane prefHeight="611.0" prefWidth="1206.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.d24hostelsystem.controller.RoomsFormController">
    <children>
-      <JFXTextField fx:id="txtRoomId" focusColor="#d71111" layoutX="243.0" layoutY="198.0" prefHeight="27.0" prefWidth="195.0" promptText="Room ID" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtRoomId" focusColor="#d71111" labelFloat="true" layoutX="243.0" layoutY="198.0" prefHeight="27.0" prefWidth="195.0" promptText="Room ID" unFocusColor="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtRoomType" focusColor="#d71111" layoutX="243.0" layoutY="260.0" prefHeight="27.0" prefWidth="195.0" promptText="Type" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtRoomType" focusColor="#d71111" labelFloat="true" layoutX="243.0" layoutY="260.0" prefHeight="27.0" prefWidth="195.0" promptText="Type" unFocusColor="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtRoomKeyMoney" focusColor="#d71111" layoutX="243.0" layoutY="323.0" prefHeight="27.0" prefWidth="195.0" promptText="Key Money" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtRoomKeyMoney" focusColor="#d71111" labelFloat="true" layoutX="243.0" layoutY="323.0" prefHeight="27.0" prefWidth="195.0" promptText="Key Money" unFocusColor="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtRoomQty" focusColor="#d71111" layoutX="243.0" layoutY="385.0" prefHeight="27.0" prefWidth="195.0" promptText="Quantity" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtRoomQty" focusColor="#d71111" labelFloat="true" layoutX="243.0" layoutY="385.0" prefHeight="27.0" prefWidth="195.0" promptText="Quantity" unFocusColor="WHITE">
          <font>
             <Font size="15.0" />
          </font>

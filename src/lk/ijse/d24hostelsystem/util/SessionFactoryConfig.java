@@ -1,5 +1,7 @@
 package lk.ijse.d24hostelsystem.util;
 
+import lk.ijse.d24hostelsystem.entity.Reservation;
+import lk.ijse.d24hostelsystem.entity.Room;
 import lk.ijse.d24hostelsystem.entity.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -13,6 +15,8 @@ public class SessionFactoryConfig {
         sessionFactory = new Configuration()
                 .mergeProperties(Utility.getProperties())
                 .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Room.class)
+                .addAnnotatedClass(Reservation.class)
                 .buildSessionFactory();
     }
     public static SessionFactoryConfig getInstance() {

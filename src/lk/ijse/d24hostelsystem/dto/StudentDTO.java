@@ -4,29 +4,30 @@ import lk.ijse.d24hostelsystem.entity.Student;
 
 import java.util.Date;
 
-public class StudentDto {
+public class StudentDTO {
     String studentId;
     String studentName;
     String nic;
     String homeTown;
-    Date dob;
+    String dob;
     String gender;
-    int phoneNumber;
+    String phoneNumber;
     String university;
 
-    public StudentDto() {
+    public StudentDTO() {
     }
 
-    public StudentDto(String studentId, String studentName, String nic, String homeTown, Date dob, String gender, int phoneNumber, String university) {
+    public StudentDTO(String studentId, String studentName, String nic, String homeTown, String gender, String phoneNumber, String university) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.nic = nic;
         this.homeTown = homeTown;
-        this.dob = dob;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.university = university;
     }
+
+
 
     public String getStudentId() {
         return studentId;
@@ -60,11 +61,11 @@ public class StudentDto {
         this.homeTown = homeTown;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -76,11 +77,11 @@ public class StudentDto {
         this.gender = gender;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -106,17 +107,5 @@ public class StudentDto {
                 '}';
     }
 
-    public Student toEntity() {
-        Student studentDto=new Student();
-        studentDto.setStudentId(this.studentId);
-        studentDto.setStudentName(this.studentName);
-        studentDto.setNic(this.nic);
-        studentDto.setHomeTown(this.homeTown);
-        studentDto.setDob(this.dob);
-        studentDto.setGender(this.gender);
-        studentDto.setPhoneNumber(this.phoneNumber);
-        studentDto.setUniversity(this.university);
-        return studentDto;
-    }
 
 }

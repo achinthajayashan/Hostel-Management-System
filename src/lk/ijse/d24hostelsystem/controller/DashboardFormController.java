@@ -38,17 +38,17 @@ public class DashboardFormController {
     }
 
     public void reservationOnAction(ActionEvent actionEvent) throws IOException {
-        new Alert(Alert.AlertType.WARNING, "This function has not Developed yet").show();
+        //new Alert(Alert.AlertType.WARNING, "This function has not Developed yet").show();
         Navigation.navigate(Routes.RESERVATION,loadPane);
     }
 
     public void studentsOnAction(ActionEvent actionEvent) throws IOException {
-        new Alert(Alert.AlertType.WARNING, "This function has not Developed yet").show();
+        //new Alert(Alert.AlertType.WARNING, "This function has not Developed yet").show();
         Navigation.navigate(Routes.STUDENT,loadPane);
     }
 
     public void roomsOnAction(ActionEvent actionEvent) throws IOException {
-        new Alert(Alert.AlertType.WARNING, "This function has not Developed yet").show();
+        //new Alert(Alert.AlertType.WARNING, "This function has not Developed yet").show();
         Navigation.navigate(Routes.ROOMS,loadPane);
     }
 

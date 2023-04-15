@@ -4,13 +4,19 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.d24hostelsystem.dto.StudentDto;
-import lk.ijse.d24hostelsystem.util.Navigation;
-import lk.ijse.d24hostelsystem.util.Routes;
+import lk.ijse.d24hostelsystem.bo.BOFactory;
+import lk.ijse.d24hostelsystem.bo.custom.StudentBO;
+import lk.ijse.d24hostelsystem.dto.StudentDTO;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentFormController {
     public AnchorPane studentPane;
@@ -29,6 +35,8 @@ public class StudentFormController {
     public JFXButton btnClear;
     public JFXButton btnDeleteStudent;
 
+    private StudentBO studentBO= (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.Student);
+
     public void initialize(){
         txtStudentName.setDisable(true);
         txtStudentId.setDisable(true);
@@ -43,18 +51,19 @@ public class StudentFormController {
         btnUpdateStudent.setDisable(true);
         btnDeleteStudent.setDisable(true);
         btnClear.setDisable(true);
+
     }
 
     public void goBackOnAction(ActionEvent actionEvent) throws IOException {
 
     }
 
-    public void addStudentVisibleOnAction(ActionEvent actionEvent) {
+    public void addStudentVisibleOnAction(ActionEvent actionEvent) throws Exception {
         txtStudentName.setDisable(false);
         txtStudentId.setDisable(false);
         txtStudentNic.setDisable(false);
         txtStudentHomeTown.setDisable(false);
-        txtStudentDob.setDisable(false);
+        txtStudentDob.setDisable(true);
         cmbStudentGender.setDisable(false);
         txtStudentPhoneNumber.setDisable(false);
         txtStudentUniversity.setDisable(false);
@@ -63,6 +72,8 @@ public class StudentFormController {
         btnSearchStudent.setDisable(true);
         btnUpdateStudent.setDisable(true);
         btnDeleteStudent.setDisable(true);
+        setCmbGender();
+        setID();
     }
 
     public void updateStudentVisibleOnAction(ActionEvent actionEvent) {
@@ -81,12 +92,40 @@ public class StudentFormController {
         btnClear.setDisable(true);
     }
 
-    public void saveStudentOnAction(ActionEvent actionEvent) {
+    public void saveStudentOnAction(ActionEvent actionEvent) throws Exception {
        // getStudentDto();
-        StudentDto studentDto=new StudentDto();
+        StudentDTO studentDto=new StudentDTO();
         studentDto.setStudentId(txtStudentId.getText());
         studentDto.setStudentName(txtStudentName.getText());
         studentDto.setHomeTown(txtStudentHomeTown.getText());
+
+        boolean isValidate = checkValidation();
+        if (isValidate){
+            boolean isSaved = studentBO.saveStudent(
+                    new StudentDTO(
+                            txtStudentId.getText(),
+                            txtStudentName.getText(),
+                            txtStudentNic.getText(),
+                            txtStudentHomeTown.getText(),
+                            (String) cmbStudentGender.getSelectionModel().getSelectedItem(),
+                            txtStudentPhoneNumber.getText(),
+                            txtStudentUniversity.getText()
+                    )
+            );
+
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION, "Student saved").show();
+                clearFields();
+//                tblStudent.getItems().clear();
+                //loadAllStudents();
+
+//                btnCancel.setDisable(true);
+//                btnAddStudent.setDisable(false);
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Error").show();
+            }
+
+        }
 
     }
 
@@ -106,7 +145,31 @@ public class StudentFormController {
         btnClear.setDisable(true);
     }
 
-    public void updateStudentOnAction(ActionEvent actionEvent) {
+    public void updateStudentOnAction(ActionEvent actionEvent) throws Exception {
+        boolean isValidate = checkValidation();
+        if (isValidate){
+            boolean isUpdated = studentBO.updateStudent(
+                    new StudentDTO(
+                            txtStudentId.getText(),
+                            txtStudentName.getText(),
+                            txtStudentNic.getText(),
+                            txtStudentHomeTown.getText(),
+                            (String) cmbStudentGender.getSelectionModel().getSelectedItem(),
+                            txtStudentPhoneNumber.getText(),
+                            txtStudentUniversity.getText()
+                    )
+            );
+
+            if (isUpdated){
+                new Alert(Alert.AlertType.CONFIRMATION, "Room updated").show();
+
+                clearFields();
+
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Error").show();
+            }
+
+        }
     }
 
     public void clearOnAction(ActionEvent actionEvent) {
@@ -118,7 +181,30 @@ public class StudentFormController {
         txtStudentUniversity.clear();
     }
 
-    public void deleteStudentOnAction(ActionEvent actionEvent) {
+    public void deleteStudentOnAction(ActionEvent actionEvent) throws Exception {
+        boolean isValidate = checkValidation();
+        if (isValidate){
+            boolean isDeleted = studentBO.deleteStudent(
+                    new StudentDTO(
+                            txtStudentId.getText(),
+                            txtStudentName.getText(),
+                            txtStudentNic.getText(),
+                            txtStudentHomeTown.getText(),
+                            (String) cmbStudentGender.getSelectionModel().getSelectedItem(),
+                            txtStudentPhoneNumber.getText(),
+                            txtStudentUniversity.getText()
+                    )
+            );
+
+            if (isDeleted){
+                new Alert(Alert.AlertType.CONFIRMATION, "Room Deleted").show();
+
+                clearFields();
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Error").show();
+            }
+
+        }
     }
 
     public void deleteStudentVisibleOnAction(ActionEvent actionEvent) {
@@ -137,12 +223,66 @@ public class StudentFormController {
         btnClear.setDisable(true);
     }
     //String name= txtStudentName.getText();
-    private  StudentDto getStudentDto(){
-        StudentDto studentDto=new StudentDto();
+    private StudentDTO getStudentDto(){
+        StudentDTO studentDto=new StudentDTO();
         studentDto.setStudentId(txtStudentId.getText());
         studentDto.setStudentName(txtStudentName.getText());
         studentDto.setHomeTown(txtStudentHomeTown.getText());
 
         return studentDto;
+    }
+
+
+
+
+
+
+    private void setID() throws Exception {
+       txtStudentId.setText(studentBO.generateNextStudentID());
+
+        System.out.println(studentBO.generateNextStudentID());
+    }
+
+    private void setCmbGender(){
+        ArrayList<String> genders = new ArrayList<>();
+        genders.add("Male");
+        genders.add("Female");
+
+
+        ObservableList<String> observableList = FXCollections.observableList(genders);
+        cmbStudentGender.setItems(observableList);
+    }
+
+    private boolean checkValidation(){
+        String nameText = txtStudentName.getText();
+        String addressText = txtStudentHomeTown.getText();
+        String contactText = txtStudentPhoneNumber.getText();
+
+        if (!nameText.matches("[A-Za-z ]+")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid name").show();
+            txtStudentName.requestFocus();
+            return false;
+        } else if (!addressText.matches(".{2,}")) {
+            new Alert(Alert.AlertType.ERROR, "Address should be at least 3 characters long").show();
+            txtStudentHomeTown.requestFocus();
+            return false;
+        }else if (!contactText.matches(".*(?:7|0|(?:\\\\+94))[0-9]{9,10}")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Contact").show();
+            txtStudentPhoneNumber.requestFocus();
+            return false;
+        }else {
+            return true;
+        }
+
+    }
+
+    private void clearFields(){
+        txtStudentName.clear();
+        //txtStudentId.clear();
+        txtStudentNic.clear();
+        txtStudentHomeTown.clear();
+        txtStudentPhoneNumber.clear();
+        txtStudentUniversity.clear();
+        cmbStudentGender.getSelectionModel().clearSelection();
     }
 }
