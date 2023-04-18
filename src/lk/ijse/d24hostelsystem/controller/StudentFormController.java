@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.d24hostelsystem.bo.BOFactory;
@@ -34,10 +36,19 @@ public class StudentFormController {
     public JFXButton btnUpdateStudent;
     public JFXButton btnClear;
     public JFXButton btnDeleteStudent;
+    public TableView <StudentDTO>tblStudents;
+    public TableColumn <StudentDTO ,String>colID;
+    public TableColumn <StudentDTO ,String>colName;
+    public TableColumn <StudentDTO ,String>colNIC;
+    public TableColumn <StudentDTO ,String>colAddress;
+    public TableColumn <StudentDTO ,String>colGender;
+    public TableColumn <StudentDTO ,String>colPhoneNum;
+    public TableColumn <StudentDTO ,String>colUniversity;
 
     private StudentBO studentBO= (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.Student);
 
-    public void initialize(){
+    public void initialize() throws Exception {
+        setProperties();
         txtStudentName.setDisable(true);
         txtStudentId.setDisable(true);
         txtStudentNic.setDisable(true);
@@ -51,7 +62,18 @@ public class StudentFormController {
         btnUpdateStudent.setDisable(true);
         btnDeleteStudent.setDisable(true);
         btnClear.setDisable(true);
+        loadAllStudents();
+        getData();
 
+    }
+    private void setProperties(){
+        colID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("homeTown"));
+        colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        colPhoneNum.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        colUniversity.setCellValueFactory(new PropertyValueFactory<>("university"));
     }
 
     public void goBackOnAction(ActionEvent actionEvent) throws IOException {
@@ -117,7 +139,7 @@ public class StudentFormController {
                 new Alert(Alert.AlertType.CONFIRMATION, "Student saved").show();
                 clearFields();
 //                tblStudent.getItems().clear();
-                //loadAllStudents();
+                loadAllStudents();
 
 //                btnCancel.setDisable(true);
 //                btnAddStudent.setDisable(false);
@@ -161,9 +183,10 @@ public class StudentFormController {
             );
 
             if (isUpdated){
-                new Alert(Alert.AlertType.CONFIRMATION, "Room updated").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Student updated").show();
 
                 clearFields();
+                loadAllStudents();
 
             }else{
                 new Alert(Alert.AlertType.ERROR, "Error").show();
@@ -200,6 +223,7 @@ public class StudentFormController {
                 new Alert(Alert.AlertType.CONFIRMATION, "Room Deleted").show();
 
                 clearFields();
+                loadAllStudents();
             }else{
                 new Alert(Alert.AlertType.ERROR, "Error").show();
             }
@@ -284,5 +308,33 @@ public class StudentFormController {
         txtStudentPhoneNumber.clear();
         txtStudentUniversity.clear();
         cmbStudentGender.getSelectionModel().clearSelection();
+    }
+    private void loadAllStudents() throws Exception {
+        List<StudentDTO> studentDTOS = studentBO.loadAll();
+        ObservableList<StudentDTO> observableList= FXCollections.observableList(studentDTOS);
+        tblStudents.setItems(observableList);
+    }
+
+    void getData(){
+        tblStudents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//            btnCancel.setDisable(true);
+//
+//            btnAdd.setText(newValue != null ? "Update" : "Save");
+//            btnAdd.setDisable(newValue == null);
+
+            if (newValue != null) {
+                txtStudentId.setText(newValue.getStudentId());
+                txtStudentName.setText(newValue.getStudentName());
+                txtStudentNic.setText(newValue.getNic());
+               txtStudentHomeTown.setText(newValue.getHomeTown());
+                txtStudentPhoneNumber.setText(newValue.getPhoneNumber());
+                txtStudentUniversity.setText(newValue.getUniversity());
+
+                if (newValue.getGender().equals("Male")){
+                    setCmbGender();
+                    cmbStudentGender.getSelectionModel().select(0);
+                }else cmbStudentGender.getSelectionModel().select(1);
+            }
+        });
     }
 }

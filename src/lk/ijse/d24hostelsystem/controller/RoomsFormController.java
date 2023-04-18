@@ -174,13 +174,18 @@ public class RoomsFormController {
 
     void getData(){
         tblRooms.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            //setFieldsActivation(false,true);
+            //btnCancel.setDisable(true);
+
+            //btnAdd.setText(newValue != null ? "Update" : "Save");
+            //btnAdd.setDisable(newValue == null);
 
             if (newValue != null) {
 
-//                txtRoomId.setText(newValue.getId());
-//                txtRoomType.setText(newValue.getType());
-//                txtRoomKeyMoney.setText(newValue.getKeyMoney());
-//                txtRoomQty.setText(String.valueOf(newValue.getQty()));
+                txtRoomId.setText(newValue.getId());
+                txtRoomType.setText(newValue.getType());
+                txtRoomKeyMoney.setText(newValue.getKeyMoney());
+                txtRoomQty.setText(String.valueOf(newValue.getQty()));
 
             }
         });

@@ -9,6 +9,7 @@ import lk.ijse.d24hostelsystem.util.SessionFactoryConfig;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentBOImpl implements StudentBO {
@@ -16,7 +17,26 @@ public class StudentBOImpl implements StudentBO {
     StudentDAO studentDAO = (StudentDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.Student);
     @Override
     public List<StudentDTO> loadAll() throws Exception {
-        return null;
+        session= SessionFactoryConfig.getInstance().getSession();
+        studentDAO.setSession(session);
+        List<Student> students = studentDAO.loadAll();
+        List<StudentDTO>studentDTOS=new ArrayList<>();
+
+        for (Student student:students) {
+            studentDTOS.add(
+                    new StudentDTO(
+                            student.getStudentId(),
+                            student.getStudentName(),
+                            student.getNic(),
+                            student.getHomeTown(),
+                            student.getGender(),
+                            student.getPhoneNumber(),
+                            student.getUniversity()
+                    )
+            );
+        }
+
+        return studentDTOS;
     }
 
     @Override
