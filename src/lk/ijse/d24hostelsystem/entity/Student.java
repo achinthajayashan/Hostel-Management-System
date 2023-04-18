@@ -25,8 +25,8 @@ public class Student {
     @Column(name = "university")
     String university;
 
-//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "student")
-//    private List<Reservation> reservationList;
+   @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "student")
+   private List<Reservation> reservationList;
 
     public Student() {
     }
