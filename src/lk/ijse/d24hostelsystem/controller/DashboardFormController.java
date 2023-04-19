@@ -56,7 +56,7 @@ public class DashboardFormController {
         System.exit(0);
     }
 
-    public void setttingsOnAction(ActionEvent actionEvent) {
-        new Alert(Alert.AlertType.WARNING, "This function has not Developed yet").show();
+    public void setttingsOnAction(ActionEvent actionEvent) throws IOException {
+        Navigation.navigate(Routes.SEETINGS,loadPane);
     }
 }

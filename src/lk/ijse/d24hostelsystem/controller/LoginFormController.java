@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -33,8 +34,12 @@ public class LoginFormController {
     public void loginOnAction(ActionEvent actionEvent) throws IOException {
 //        Stage stage= new Stage();
 //        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/ijse/d24hostelsystem/view/Dashboard.fxml"))));
+        if (txtUserName.getText().equals("achi")&& txtPassword.getText().equals("0215")){
+            pane.getChildren().setAll((Node) load(getClass().getResource("/lk/ijse/d24hostelsystem/view/DashboardForm.fxml")));
+        }else {
+           new Alert(Alert.AlertType.ERROR,"username or password not matched !").show();
+        }
 
-        pane.getChildren().setAll((Node) load(getClass().getResource("/lk/ijse/d24hostelsystem/view/DashboardForm.fxml")));
     }
 
     public void hidePasswordonAction(KeyEvent keyEvent) {

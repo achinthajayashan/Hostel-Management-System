@@ -28,6 +28,9 @@ public class Navigation {
             case RESERVATION:
                 initUI("ReservationForm.fxml");
                 break;
+            case SEETINGS:
+                initUI("UsersForm.fxml");
+                break;
             default:
                 new Alert(Alert.AlertType.ERROR,"No UI Found");
         }

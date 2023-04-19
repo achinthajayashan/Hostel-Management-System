@@ -201,6 +201,7 @@ public class ReservationFormController {
     private StudentDTO getStudentData() throws Exception {
         String studentID = cmbStudentId.getSelectionModel().getSelectedItem();
         return reservationBO.getStudent(studentID);
+
     }
 
     private RoomDTO getRoomData() throws Exception {
@@ -241,6 +242,20 @@ public class ReservationFormController {
 //                id= newValue.getResID();
             //}
         });
+    }
+
+    public void cmbStudentOnAction(ActionEvent actionEvent) throws Exception {
+        if (cmbStudentId.getSelectionModel().getSelectedItem()!=null){
+            StudentDTO studentData= getStudentData();
+            txtStudentName.setText(studentData.getStudentName());
+        }
+    }
+
+    public void cmbRoomOnAction(ActionEvent actionEvent) throws Exception {
+        if (cmbRoomID.getSelectionModel().getSelectedItem()!=null){
+            RoomDTO roomData = getRoomData();
+            txtRoomQty.setText(String.valueOf(roomData.getQty()));
+        }
     }
 
 }
