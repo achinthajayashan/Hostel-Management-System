@@ -1,9 +1,6 @@
 package lk.ijse.d24hostelsystem.bo;
 
-import lk.ijse.d24hostelsystem.bo.custom.impl.ReservationBOImpl;
-import lk.ijse.d24hostelsystem.bo.custom.impl.RoomsBOImpl;
-import lk.ijse.d24hostelsystem.bo.custom.impl.StudentBOImpl;
-import lk.ijse.d24hostelsystem.bo.custom.impl.UsersBOImpl;
+import lk.ijse.d24hostelsystem.bo.custom.impl.*;
 
 public class BOFactory {
     private static BOFactory BOFactory;
@@ -33,8 +30,8 @@ public class BOFactory {
                 return new ReservationBOImpl();
             case Users:
                 return new UsersBOImpl();
-//            case Login:
-//                return new LoginBOImpl();
+            case Login:
+                return new LoginBOImpl();
             default:
                 return null;
         }

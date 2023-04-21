@@ -61,9 +61,9 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Users getUsers(String userName) {
-        String hql="from Users where userName=:un";
-        Query query = session.createQuery(hql);
-        query.setParameter("un",userName);
+        String sql="from Users where userName LIKE :UN";
+        Query query = session.createQuery(sql);
+        query.setParameter("UN",userName);
         Users users = (Users) query.uniqueResult();
 
         return users;

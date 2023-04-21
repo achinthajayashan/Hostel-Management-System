@@ -4,11 +4,11 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="611.0" prefWidth="1206.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.d24hostelsystem.controller.ReservationFormController">
    <children>
@@ -20,8 +20,8 @@
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="cmbStudentId" focusColor="#c61e0f" labelFloat="true" layoutX="52.0" layoutY="149.0" prefHeight="27.0" prefWidth="187.0" promptText="Student ID" unFocusColor="WHITE" />
-      <JFXComboBox fx:id="cmbRoomID" focusColor="#c61e0f" labelFloat="true" layoutX="52.0" layoutY="199.0" prefHeight="27.0" prefWidth="187.0" promptText="Room ID" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="cmbStudentId" focusColor="#c61e0f" labelFloat="true" layoutX="52.0" layoutY="149.0" onAction="#cmbStudentOnAction" prefHeight="27.0" prefWidth="187.0" promptText="Student ID" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="cmbRoomID" focusColor="#c61e0f" labelFloat="true" layoutX="52.0" layoutY="199.0" onAction="#cmbRoomOnAction" prefHeight="27.0" prefWidth="187.0" promptText="Room ID" unFocusColor="WHITE" />
       <JFXTextField fx:id="txtStudentName" focusColor="#a10606" labelFloat="true" layoutX="292.0" layoutY="149.0" prefHeight="27.0" prefWidth="174.0" promptText="Student Name" unFocusColor="WHITE" />
       <JFXTextField fx:id="txtRoomQty" focusColor="#9a0904" labelFloat="true" layoutX="292.0" layoutY="192.0" prefHeight="27.0" prefWidth="174.0" promptText="Room Qty" unFocusColor="WHITE" />
       <JFXButton fx:id="dltReserveOnAction" layoutX="388.0" layoutY="246.0" onAction="#dltOnAction" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: white;" text="Delete" />
@@ -47,5 +47,10 @@
         </columns>
       </TableView>
       <JFXCheckBox fx:id="cbxStatus" checkedColor="#b20303" layoutX="52.0" layoutY="251.0" text="Key Money" unCheckedColor="WHITE" />
+      <Label layoutX="24.0" layoutY="315.0" text="Key Money Un paid Students">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

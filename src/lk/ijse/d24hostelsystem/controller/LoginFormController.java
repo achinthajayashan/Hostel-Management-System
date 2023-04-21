@@ -12,6 +12,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.d24hostelsystem.bo.BOFactory;
+import lk.ijse.d24hostelsystem.bo.custom.LoginBO;
+import lk.ijse.d24hostelsystem.dto.UsersDTO;
 
 import java.io.IOException;
 
@@ -26,15 +29,21 @@ public class LoginFormController {
     public AnchorPane pane;
     String password;
 
+    private LoginBO loginBO= (LoginBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.Login);
+
     public void initialize(){
         hideIcon.setVisible(false);
         txtShowPassword.setVisible(false);
     }
 
-    public void loginOnAction(ActionEvent actionEvent) throws IOException {
+    public void loginOnAction(ActionEvent actionEvent) throws Exception {
+        UsersDTO usersDTO =loginBO.getUsersDto(txtUserName.getText());
+//        if (usersDTO!=null){
+//            System.out.println(usersDTO);
+//        }
 //        Stage stage= new Stage();
 //        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/ijse/d24hostelsystem/view/Dashboard.fxml"))));
-        if (txtUserName.getText().equals("achi")&& txtPassword.getText().equals("0215")){
+        if (usersDTO.getPassword().equals(txtPassword.getText())){
             pane.getChildren().setAll((Node) load(getClass().getResource("/lk/ijse/d24hostelsystem/view/DashboardForm.fxml")));
         }else {
            new Alert(Alert.AlertType.ERROR,"username or password not matched !").show();
